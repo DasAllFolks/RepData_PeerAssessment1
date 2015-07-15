@@ -8,6 +8,10 @@ output:
 
 ## Loading and preprocessing the data
 
+```{R}
+data = read.csv('activity.csv')
+head(data)
+```
 
 
 ## What is mean total number of steps taken per day?
