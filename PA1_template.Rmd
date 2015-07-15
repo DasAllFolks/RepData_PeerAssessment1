@@ -17,6 +17,9 @@ tail(data)
 
 ## What is mean total number of steps taken per day?
 
+# XXXX: Restart this - gasp! - actually using the dates provided in
+#   the data.
+
 Note that each day consists of approximately
 
 XXXX: Name this and reuse it.
