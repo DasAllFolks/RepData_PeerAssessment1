@@ -11,6 +11,7 @@ output:
 ```{R}
 data = read.csv('activity.csv')
 head(data)
+tail(data)
 ```
 
 
