@@ -9,6 +9,7 @@ output:
 ## Loading and preprocessing the data
 
 ```{R}
+unclassed_data = read.csv('activity.csv')
 data = read.csv('activity.csv', colClasses=c('numeric', 'Date', 'numeric'))
 head(data)
 tail(data)
@@ -21,12 +22,18 @@ Per the assignment instructions, we will for now (naively) limit our analysis fo
 problem to non-missing values:
 
 ```{R}
+unclassed_cleaned <- unclassed_data[!is.na(unclassed_data$steps),]
 cleaned <- data[!is.na(data$steps),]
+nrow(unclassed_cleaned)
+nrow(cleaned)
 ```
 
 Find the total number of steps per day, excluding missing values:
 
 ```{R}
+unclassed_by_date <- split(unclassed_cleaned, unclassed_cleaned$date)
+unclassed_total_steps_per_day <- sapply(unclassed_by_date, function (date) { sum(date$steps) })
+
 by_date <- split(cleaned, cleaned$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 ```
@@ -34,6 +41,9 @@ total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 Histogram of total steps per day:
 
 ```{R}
+length(unclassed_total_steps_per_day)
+length(total_steps_per_day)
+hist(unclassed_total_steps_per_day, breaks=10, ylim = c(0, 25))
 hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
 ```
 

@@ -5,6 +5,7 @@
 
 
 ```r
+unclassed_data = read.csv('activity.csv')
 data = read.csv('activity.csv', colClasses=c('numeric', 'Date', 'numeric'))
 head(data)
 ```
@@ -41,13 +42,30 @@ problem to non-missing values:
 
 
 ```r
+unclassed_cleaned <- unclassed_data[!is.na(unclassed_data$steps),]
 cleaned <- data[!is.na(data$steps),]
+nrow(unclassed_cleaned)
+```
+
+```
+## [1] 15264
+```
+
+```r
+nrow(cleaned)
+```
+
+```
+## [1] 15264
 ```
 
 Find the total number of steps per day, excluding missing values:
 
 
 ```r
+unclassed_by_date <- split(unclassed_cleaned, unclassed_cleaned$date)
+unclassed_total_steps_per_day <- sapply(unclassed_by_date, function (date) { sum(date$steps) })
+
 by_date <- split(cleaned, cleaned$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 ```
@@ -56,10 +74,32 @@ Histogram of total steps per day:
 
 
 ```r
-hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
+length(unclassed_total_steps_per_day)
+```
+
+```
+## [1] 61
+```
+
+```r
+length(total_steps_per_day)
+```
+
+```
+## [1] 53
+```
+
+```r
+hist(unclassed_total_steps_per_day, breaks=10, ylim = c(0, 25))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+
+```r
+hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-2.png) 
 
 We can then calculate the mean and median number of steps taken per day as follows:
 
