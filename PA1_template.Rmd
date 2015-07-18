@@ -128,8 +128,15 @@ the NA intervals was 0.  Replacing each of these NAs with one of the (often nonz
 daily interval estimates, therefore, not surprisingly ended up increasing our calculated
 mean and median number of steps per day!
 
-
-
+The histograms also illustrate why the mean and median converged so dramatically when we
+replaced the NAs with interpolated values.  The histogram based on the interpolated data
+appears to approximate a normal distribution very closely:  the histogram of just the
+non-NA data, by contrast, looks roughly normal, but also has a notable peak in its
+lowermost "bucket."  This lower peak no doubt stemmed from those total daily step
+counts which systematically underestimated the true daily step count by treating NAs as
+zeroes:  once this artificial asymmetry had been corrected by replacing the NAs with
+average interval values, the histogram became much more symmetric, and the mean and
+median converged accordingly.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?

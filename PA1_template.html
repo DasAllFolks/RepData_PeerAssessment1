@@ -159,8 +159,14 @@ hist(total_steps_per_day, breaks=10, ylim = c(0, 25))</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>median(total_steps_per_day)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
-<p>An interesting question to ask up front is how to deal with the issue of missing values in our data.</p>
-<p>The assignment instructs that, “For this part of the assignment, you can ignore the missing values in the dataset.” However, it’s probably wise to get an initial sense of exactly how frequent these missing values were and how they are distributed throughout the dataset: a day which consists strictly of NA values could probably be ignored entirely from our analysis, whereas a day which requires a mix of NA and non-NA values might or might not be useful for our analysis depending on the percentage of values missing.</p>
+<p>These values differ from the original ones calculated (i.e., mean and median of total number of steps per day for non-NA data only) in two dramatic ways:</p>
+<ul>
+<li>Both values are higher than the originals (especially so in the case of the mean)</li>
+<li>Whereas the original median exceeded the original mean by over 600 steps, the new mean and median are, in fact, exactly equal out to two decimal places.</li>
+</ul>
+<p>Comparing the two histograms gives us some insight into why this probably happened.</p>
+<p>When we originally just summed up the total steps per day which weren’t NAs, this was tantamount to pretending that the number of steps taken by the test subject in each of the NA intervals was 0. Replacing each of these NAs with one of the (often nonzero) daily interval estimates, therefore, not surprisingly ended up increasing our calculated mean and median number of steps per day!</p>
+<p>The histograms also illustrate why the mean and median converged so dramatically when we replaced the NAs with interpolated values. The histogram based on the interpolated data appears to approximate a normal distribution very closely: the histogram of just the non-NA data, by contrast, looks roughly normal, but also has a notable peak in its lowermost “bucket.” This lower peak no doubt stemmed from those total daily step counts which systematically underestimated the true daily step count by treating NAs as zeroes: once this artificial asymmetry had been corrected by replacing the NAs with average interval values, the histogram became much more symmetric, and the mean and median converged accordingly.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
