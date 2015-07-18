@@ -56,7 +56,7 @@ Histogram of total steps per day:
 
 
 ```r
-hist(total_steps_per_day)
+hist(total_steps_per_day, ylim = c(0, 35))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
@@ -176,7 +176,7 @@ Now we can recalculate the total number of steps taken per day and do a new hist
 ```r
 by_date <- split(interpolated, interpolated$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
-hist(total_steps_per_day)
+hist(total_steps_per_day, ylim = c(0, 35))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 

@@ -34,7 +34,7 @@ total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 Histogram of total steps per day:
 
 ```{R}
-hist(total_steps_per_day)
+hist(total_steps_per_day, ylim = c(0, 35))
 ```
 
 We can then calculate the mean and median number of steps taken per day as follows:
@@ -103,7 +103,7 @@ Now we can recalculate the total number of steps taken per day and do a new hist
 ```{R}
 by_date <- split(interpolated, interpolated$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
-hist(total_steps_per_day)
+hist(total_steps_per_day, ylim = c(0, 35))
 
 ```
 
