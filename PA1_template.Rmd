@@ -68,13 +68,13 @@ We can figure out which of these 5-minute intervals, averaged across days, conta
 most steps as follows:
 
 ```{R}
-# Find the max value, swap the names and values rows, then index in using that max value
-# to get the interval in which it was found.
-max_steps <- max(averages)
-intervals <- names(averages)
-names(intervals) <- averages
-intervals[max_steps]
+averages <- data.frame(interval = names(averages), average_steps=averages)
+library(dplyr)
+tail(arrange(averages, average_steps))
 ```
+
+As we can see from the sorted data frame, interval 835 had the highest average number of
+steps across all days.
 
 
 ## Imputing missing values

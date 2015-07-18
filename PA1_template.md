@@ -133,17 +133,35 @@ most steps as follows:
 
 
 ```r
-# Find the max value, swap the names and values rows, then index in using that max value
-# to get the interval in which it was found.
-max_steps <- max(averages)
-intervals <- names(averages)
-names(intervals) <- averages
-intervals[max_steps]
+averages <- data.frame(interval = names(averages), average_steps=averages)
+library(dplyr)
 ```
 
 ```
-## 56.3018867924528 
-##           "1705"
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
+tail(arrange(averages, average_steps))
+```
+
+```
+##     interval average_steps
+## 283      820      171.1509
+## 284      830      177.3019
+## 285      845      179.5660
+## 286      850      183.3962
+## 287      840      195.9245
+## 288      835      206.1698
 ```
 
 
