@@ -98,6 +98,19 @@ for(i in 1:nrow(data)) {
 }
 ```
 
+We make a histogram of this "interpolated" data set as follows:
+
+```{R}
+hist(interpolated)
+```
+
+And we can calculate the mean and median of the new dataset as follows:
+
+```{R}
+mean(interpolated$steps)
+median(interpolated$steps)
+```
+
 An interesting question to ask up front is how to deal with the issue of missing values in our data.
 
 The assignment instructs that, "For this part of the assignment, you can ignore the missing values in the dataset."  However, it's probably wise to get an initial sense of exactly how frequent these missing values were and how they are distributed throughout the dataset:  a day which consists strictly of NA values could probably be ignored entirely from our analysis, whereas a day which requires a mix of NA and non-NA values might or might not be useful for our analysis depending on the percentage of values missing.
