@@ -21,11 +21,7 @@ Per the assignment instructions, we will for now (naively) limit our analysis fo
 problem to non-missing values:
 
 ```{R}
-print(nrow(data))
-print(sum(is.na(data$steps)))
 cleaned <- data[!is.na(data$steps),]
-print(nrow(cleaned))
-print(sum(is.na(cleaned$steps)))
 ```
 
 Find the total number of steps per day, excluding missing values:
@@ -78,6 +74,13 @@ steps across all days.
 
 
 ## Imputing missing values
+
+The number of rows (measurement intervals) missing data can be found as follows:
+
+```{R}
+sum(is.na(data$steps))
+```
+
 
 An interesting question to ask up front is how to deal with the issue of missing values in our data.
 

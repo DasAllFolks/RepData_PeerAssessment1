@@ -87,15 +87,7 @@ head(data)</code></pre>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
 <p>Per the assignment instructions, we will for now (naively) limit our analysis for this problem to non-missing values:</p>
-<pre class="r"><code>print(nrow(data))</code></pre>
-<pre><code>## [1] 17568</code></pre>
-<pre class="r"><code>print(sum(is.na(data$steps)))</code></pre>
-<pre><code>## [1] 2304</code></pre>
-<pre class="r"><code>cleaned &lt;- data[!is.na(data$steps),]
-print(nrow(cleaned))</code></pre>
-<pre><code>## [1] 15264</code></pre>
-<pre class="r"><code>print(sum(is.na(cleaned$steps)))</code></pre>
-<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>cleaned &lt;- data[!is.na(data$steps),]</code></pre>
 <p>Find the total number of steps per day, excluding missing values:</p>
 <pre class="r"><code>by_date &lt;- split(cleaned, cleaned$date)
 total_steps_per_day &lt;- sapply(by_date, function (date) { sum(date$steps) })</code></pre>
@@ -140,9 +132,13 @@ library(dplyr)</code></pre>
 ## 286      850      183.3962
 ## 287      840      195.9245
 ## 288      835      206.1698</code></pre>
+<p>As we can see from the sorted data frame, interval 835 had the highest average number of steps across all days.</p>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
+<p>The number of rows (measurement intervals) missing data can be found as follows:</p>
+<pre class="r"><code>sum(is.na(data$steps))</code></pre>
+<pre><code>## [1] 2304</code></pre>
 <p>An interesting question to ask up front is how to deal with the issue of missing values in our data.</p>
 <p>The assignment instructs that, “For this part of the assignment, you can ignore the missing values in the dataset.” However, it’s probably wise to get an initial sense of exactly how frequent these missing values were and how they are distributed throughout the dataset: a day which consists strictly of NA values could probably be ignored entirely from our analysis, whereas a day which requires a mix of NA and non-NA values might or might not be useful for our analysis depending on the percentage of values missing.</p>
 </div>

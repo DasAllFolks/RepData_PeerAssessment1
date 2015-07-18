@@ -41,36 +41,7 @@ problem to non-missing values:
 
 
 ```r
-print(nrow(data))
-```
-
-```
-## [1] 17568
-```
-
-```r
-print(sum(is.na(data$steps)))
-```
-
-```
-## [1] 2304
-```
-
-```r
 cleaned <- data[!is.na(data$steps),]
-print(nrow(cleaned))
-```
-
-```
-## [1] 15264
-```
-
-```r
-print(sum(is.na(cleaned$steps)))
-```
-
-```
-## [1] 0
 ```
 
 Find the total number of steps per day, excluding missing values:
@@ -164,8 +135,23 @@ tail(arrange(averages, average_steps))
 ## 288      835      206.1698
 ```
 
+As we can see from the sorted data frame, interval 835 had the highest average number of
+steps across all days.
+
 
 ## Imputing missing values
+
+The number of rows (measurement intervals) missing data can be found as follows:
+
+
+```r
+sum(is.na(data$steps))
+```
+
+```
+## [1] 2304
+```
+
 
 An interesting question to ask up front is how to deal with the issue of missing values in our data.
 
