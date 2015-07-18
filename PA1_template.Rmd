@@ -98,17 +98,20 @@ for(i in 1:nrow(data)) {
 }
 ```
 
-We make a histogram of this "interpolated" data set as follows:
+Now we can recalculate the total number of steps taken per day and do a new histogram:
 
 ```{R}
-hist(interpolated)
+by_date <- split(interpolated, interpolated$date)
+total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
+hist(total_steps_per_day)
+
 ```
 
 And we can calculate the mean and median of the new dataset as follows:
 
 ```{R}
-mean(interpolated$steps)
-median(interpolated$steps)
+mean(total_steps_per_day)
+median(total_steps_per_day)
 ```
 
 An interesting question to ask up front is how to deal with the issue of missing values in our data.

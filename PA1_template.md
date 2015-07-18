@@ -152,6 +152,53 @@ sum(is.na(data$steps))
 ## [1] 2304
 ```
 
+As a way to estimate these missing data values, we will use the average values for the
+5-minute intervals as calculated earlier in this assignment.
+
+A dataset which "fills in" these missing values using this strategy can be constructed as
+follows:
+
+
+```r
+interpolated <- data
+for(i in 1:nrow(data)) {
+  if(is.na(data$steps[i])) {
+    interval <- data$interval[i]
+    estimated_steps <- averages$average_steps[averages$interval == interval]
+    interpolated$steps[i] <- estimated_steps
+  }
+}
+```
+
+Now we can recalculate the total number of steps taken per day and do a new histogram:
+
+
+```r
+by_date <- split(interpolated, interpolated$date)
+total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
+hist(total_steps_per_day)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
+
+And we can calculate the mean and median of the new dataset as follows:
+
+
+```r
+mean(total_steps_per_day)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
+median(total_steps_per_day)
+```
+
+```
+## [1] 10766.19
+```
 
 An interesting question to ask up front is how to deal with the issue of missing values in our data.
 
