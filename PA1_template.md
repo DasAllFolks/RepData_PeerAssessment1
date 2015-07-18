@@ -5,7 +5,7 @@
 
 
 ```r
-data = read.csv('activity.csv')
+data = read.csv('activity.csv', colClasses=c('numeric', 'Date', 'numeric'))
 head(data)
 ```
 
@@ -69,7 +69,7 @@ mean(total_steps_per_day)
 ```
 
 ```
-## [1] 9354.23
+## [1] 10766.19
 ```
 
 ```r
@@ -77,7 +77,7 @@ median(total_steps_per_day)
 ```
 
 ```
-## [1] 10395
+## [1] 10765
 ```
 
 
@@ -222,7 +222,12 @@ lowermost "bucket."  This lower peak no doubt stemmed from those total daily ste
 counts which systematically underestimated the true daily step count by treating NAs as
 zeroes:  once this artificial asymmetry had been corrected by replacing the NAs with
 average interval values, the histogram became much more symmetric, and the mean and
-median converged accordingly.
+median converged accordingly.day
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
+```r
+day_type <- factor(c('weekday', 'weekend')) 
+```
