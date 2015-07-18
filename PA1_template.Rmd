@@ -17,6 +17,12 @@ tail(data)
 
 ## What is mean total number of steps taken per day?
 
+An interesting question to ask up front is how to deal with the issue of missing values in our data.
+
+The assignment instructs that, "For this part of the assignment, you can ignore the missing values in the dataset."  However, it's probably wise to get an initial sense of exactly how frequent these missing values were and how they are distributed throughout the dataset:  a day which consists strictly of NA values could probably be ignored entirely from our analysis, whereas a day which requires a mix of NA and non-NA values might or might not be useful for our analysis depending on the percentage of values missing.
+
+
+
 Per the assignment instructions, we will limit our analysis for this problem to
 non-missing values:
 
@@ -28,9 +34,11 @@ print(nrow(cleaned))
 print(sum(is.na(cleaned$steps)))
 ```
 
+Find the total number of steps per day, excluding missing values:
 
 ```{R}
-by_date <- split(data, data$date)
+by_date <- split(cleaned, cleaned$date)
+
 ```
 
 
