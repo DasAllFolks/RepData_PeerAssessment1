@@ -81,6 +81,22 @@ The number of rows (measurement intervals) missing data can be found as follows:
 sum(is.na(data$steps))
 ```
 
+As a way to estimate these missing data values, we will use the average values for the
+5-minute intervals as calculated earlier in this assignment.
+
+A dataset which "fills in" these missing values using this strategy can be constructed as
+follows:
+
+```{R}
+interpolated <- data
+for(i in 1:nrow(data)) {
+  if(is.na(data$steps[i])) {
+    interval <- data$interval[i]
+    estimated_steps <- averages$average_steps[averages$interval == interval]
+    interpolated$steps[i] <- estimated_steps
+  }
+}
+```
 
 An interesting question to ask up front is how to deal with the issue of missing values in our data.
 
