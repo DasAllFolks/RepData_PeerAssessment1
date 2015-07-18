@@ -17,8 +17,8 @@ tail(data)
 
 ## What is mean total number of steps taken per day?
 
-Per the assignment instructions, we will limit our analysis for this problem to
-non-missing values:
+Per the assignment instructions, we will for now (naively) limit our analysis for this
+problem to non-missing values:
 
 ```{R}
 print(nrow(data))
@@ -32,7 +32,9 @@ Find the total number of steps per day, excluding missing values:
 
 ```{R}
 by_date <- split(cleaned, cleaned$date)
-
+head(by_date)
+total_steps_per_day <- lapply(by_date$steps, sum)
+print(total_steps_per_day)
 ```
 
 
