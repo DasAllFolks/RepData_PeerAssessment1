@@ -128,6 +128,24 @@ plot(x = names(averages),
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
+We can figure out which of these 5-minute intervals, averaged across days, contained the
+most steps as follows:
+
+
+```r
+# Find the max value, swap the names and values rows, then index in using that max value
+# to get the interval in which it was found.
+max_steps <- max(averages)
+intervals <- names(averages)
+names(intervals) <- averages
+intervals[max_steps]
+```
+
+```
+## 56.3018867924528 
+##           "1705"
+```
+
 
 ## Imputing missing values
 

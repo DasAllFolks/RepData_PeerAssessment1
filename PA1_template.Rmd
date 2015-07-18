@@ -64,6 +64,18 @@ plot(x = names(averages),
      ylab='Average steps taken')
 ```
 
+We can figure out which of these 5-minute intervals, averaged across days, contained the
+most steps as follows:
+
+```{R}
+# Find the max value, swap the names and values rows, then index in using that max value
+# to get the interval in which it was found.
+max_steps <- max(averages)
+intervals <- names(averages)
+names(intervals) <- averages
+intervals[max_steps]
+```
+
 
 ## Imputing missing values
 
