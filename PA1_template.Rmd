@@ -17,28 +17,24 @@ tail(data)
 
 ## What is mean total number of steps taken per day?
 
-# XXXX: Restart this - gasp! - actually using the dates provided in
-#   the data.
-
-Note that each day consists of approximately
-
-XXXX: Name this and reuse it.
+Per the assignment instructions, we will limit our analysis for this problem to
+non-missing values:
 
 ```{R}
-24 * 60 * 60
+print(nrow(data))
+print(sum(is.na(data$steps)))
+cleaned <- data[!is.na(data$steps),]
+print(nrow(cleaned))
+print(sum(is.na(cleaned$steps)))
 ```
 
-seconds (i.e., the total number of hours in a day, converted to
-seconds).
-
-Since samples were taken every 5 seconds, we'll assume that each
-"day" of observations consists of at most
 
 ```{R}
-24 * 60 * 60 / 5
+by_date <- split(data, data$date)
 ```
 
-samples.
+
+
 
 ## What is the average daily activity pattern?
 
