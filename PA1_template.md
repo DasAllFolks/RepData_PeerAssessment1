@@ -119,7 +119,14 @@ cleaned dataset (i.e., still ignoring NAs) across the interval numbers:
 ```r
 by_interval = split(cleaned, cleaned$interval)
 averages <- sapply(by_interval, function (interval) { mean(interval$steps) })
+plot(x = names(averages),
+     y = averages,
+     type = 'l',
+     xlab='Time of day',
+     ylab='Average steps taken')
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 
 ## Imputing missing values
