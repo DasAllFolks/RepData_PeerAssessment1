@@ -35,10 +35,17 @@ by_date <- split(cleaned, cleaned$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 ```
 
-Histogram of the results:
+Histogram of total steps per day:
 
 ```{R}
 hist(total_steps_per_day)
+```
+
+We can then calculate the mean and median number of steps taken per day as follows:
+
+```{R}
+mean(total_steps_per_day)
+median(total_steps_per_day)
 ```
 
 

@@ -81,7 +81,7 @@ by_date <- split(cleaned, cleaned$date)
 total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 ```
 
-Histogram of the results:
+Histogram of total steps per day:
 
 
 ```r
@@ -89,6 +89,25 @@ hist(total_steps_per_day)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+
+We can then calculate the mean and median number of steps taken per day as follows:
+
+
+```r
+mean(total_steps_per_day)
+```
+
+```
+## [1] 9354.23
+```
+
+```r
+median(total_steps_per_day)
+```
+
+```
+## [1] 10395
+```
 
 
 ## What is the average daily activity pattern?
