@@ -112,6 +112,14 @@ median(total_steps_per_day)
 
 ## What is the average daily activity pattern?
 
+To find the average number of steps per 5-minute interval across all days, we split the
+cleaned dataset (i.e., still ignoring NAs) across the interval numbers:
+
+
+```r
+by_interval = split(cleaned, cleaned$interval)
+averages <- sapply(by_interval, function (interval) { mean(interval$steps) })
+```
 
 
 ## Imputing missing values

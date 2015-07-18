@@ -110,6 +110,9 @@ total_steps_per_day &lt;- sapply(by_date, function (date) { sum(date$steps) })</
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
 <h2>What is the average daily activity pattern?</h2>
+<p>To find the average number of steps per 5-minute interval across all days, we split the cleaned dataset (i.e., still ignoring NAs) across the interval numbers:</p>
+<pre class="r"><code>by_interval = split(cleaned, cleaned$interval)
+averages &lt;- sapply(by_interval, function (interval) { mean(interval$steps) })</code></pre>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
