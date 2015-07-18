@@ -32,9 +32,7 @@ Find the total number of steps per day, excluding missing values:
 
 ```{R}
 by_date <- split(cleaned, cleaned$date)
-head(by_date)
-total_steps_per_day <- lapply(by_date$steps, sum)
-print(total_steps_per_day)
+total_steps_per_day <- lapply(by_date, function (date) { sum(date$steps) })
 ```
 
 
