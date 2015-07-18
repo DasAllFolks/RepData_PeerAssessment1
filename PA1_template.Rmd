@@ -32,10 +32,14 @@ Find the total number of steps per day, excluding missing values:
 
 ```{R}
 by_date <- split(cleaned, cleaned$date)
-total_steps_per_day <- lapply(by_date, function (date) { sum(date$steps) })
+total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 ```
 
+Histogram of the results:
 
+```{R}
+hist(total_steps_per_day)
+```
 
 
 ## What is the average daily activity pattern?
