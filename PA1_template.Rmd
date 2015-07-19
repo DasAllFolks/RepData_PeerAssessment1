@@ -200,7 +200,9 @@ library(lattice)
 xyplot(
   averages$steps ~ averages$interval | averages$day_type,
   type = 'l',
-  layout = c(1, 2))
+  layout = c(1, 2),
+  xlab='Interval',
+  ylab='Number of steps')
 
 
 xyplot(

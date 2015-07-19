@@ -327,7 +327,9 @@ library(lattice)
 xyplot(
   averages$steps ~ averages$interval | averages$day_type,
   type = 'l',
-  layout = c(1, 2))
+  layout = c(1, 2),
+  xlab='Interval',
+  ylab='Number of steps')
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
