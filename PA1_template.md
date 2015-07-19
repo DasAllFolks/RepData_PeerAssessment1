@@ -280,11 +280,15 @@ par(mfrow = c(2, 1))
 plot(
   x = unique(interpolated$interval),
   y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
-  type = 'l')
+  type = 'l',
+  xlab = NA,
+  ylab = NA)
 plot(
   x = unique(interpolated$interval),
   y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
-  type = 'l')
+  type = 'l',
+  xlab=NA,
+  ylab=NA)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
