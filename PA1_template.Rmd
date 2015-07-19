@@ -163,14 +163,22 @@ weekday_data = interpolated[is_weekday(interpolated$date)]
 weekend_data = interpolated[!is_weekday(interpolated$date)]
 ```
 
-
-Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
+Get the average number of steps for each dataset separately:
 
 ```{R}
 average_steps_by_interval <- function (dataset) {
   by_interval <- split(dataset, dataset$interval)
   sapply(by_interval, function (interval) { mean(interval$steps) })
 }
+
+weekdays <- average_steps_by_interval(weekday_data)
+weekend <- average_steps_by_interval(weekend_data)
+```
+
+Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
+
+```{R}
+
 
 library(lattice)
 xyplot(
