@@ -151,9 +151,6 @@ interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
     'weekday'
   }
 }))
-head(interpolated)
-tail(interpolated)
-class(interpolated$day_type)
 ```
 
 
@@ -165,6 +162,8 @@ average_steps_by_interval <- function (dataset) {
   sapply(by_interval, function (interval) { mean(interval$steps) })
 }
 
-# library(lattice)
-# xyplot(average_steps_by_interval(interpolated)|interpolated$day_type)
+library(lattice)
+xyplot(
+  average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
+  type = 'l')
 ```

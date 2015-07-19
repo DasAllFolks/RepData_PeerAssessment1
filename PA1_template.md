@@ -264,39 +264,6 @@ interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
     'weekday'
   }
 }))
-head(interpolated)
-```
-
-```
-##       steps       date interval day_type
-## 1 1.7169811 2012-10-01        0  weekday
-## 2 0.3396226 2012-10-01        5  weekday
-## 3 0.1320755 2012-10-01       10  weekday
-## 4 0.1509434 2012-10-01       15  weekday
-## 5 0.0754717 2012-10-01       20  weekday
-## 6 2.0943396 2012-10-01       25  weekday
-```
-
-```r
-tail(interpolated)
-```
-
-```
-##           steps       date interval day_type
-## 17563 2.6037736 2012-11-30     2330  weekday
-## 17564 4.6981132 2012-11-30     2335  weekday
-## 17565 3.3018868 2012-11-30     2340  weekday
-## 17566 0.6415094 2012-11-30     2345  weekday
-## 17567 0.2264151 2012-11-30     2350  weekday
-## 17568 1.0754717 2012-11-30     2355  weekday
-```
-
-```r
-class(interpolated$day_type)
-```
-
-```
-## [1] "factor"
 ```
 
 
@@ -309,6 +276,10 @@ average_steps_by_interval <- function (dataset) {
   sapply(by_interval, function (interval) { mean(interval$steps) })
 }
 
-# library(lattice)
-# xyplot(average_steps_by_interval(interpolated)|interpolated$day_type)
+library(lattice)
+xyplot(
+  average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
+  type = 'l')
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
