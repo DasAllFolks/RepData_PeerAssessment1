@@ -140,5 +140,12 @@ the median to be equal to the mean.
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```{R}
-day_type <- factor(c('weekday', 'weekend')) 
+interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
+  weekday <- weekdays(date)
+  if(weekday %in% c('Saturday', 'Sunday')) {
+    'weekend'
+  } else {
+    'weekday'
+  }
+}))
 ```
