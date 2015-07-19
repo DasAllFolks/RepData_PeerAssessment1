@@ -240,29 +240,13 @@ print(percent_na_by_date)
 ##          1
 ```
 
-These values differ from the original ones calculated (i.e., mean and median of total number of steps per day for non-NA data only) in two dramatic ways:
+What this means is that when we impute the mean number of steps per interval to each of
+these 100% NA days, we essentially add several new samples to our data set with a total
+number of steps per day lying exactly at the previously calculated dataset mean.
 
-- Both values are higher than the originals (especially so in the case of the mean)
-- Whereas the original median exceeded the original mean by over 600 steps, the new
-  mean and median are, in fact, exactly equal out to two decimal places.
-
-Comparing the two histograms gives us some insight into why this probably happened.
-
-When we originally just summed up the total steps per day which weren't NAs, this was
-tantamount to pretending that the number of steps taken by the test subject in each of
-the NA intervals was 0.  Replacing each of these NAs with one of the (often nonzero)
-daily interval estimates, therefore, not surprisingly ended up increasing our calculated
-mean and median number of steps per day!
-
-The histograms also illustrate why the mean and median converged so dramatically when we
-replaced the NAs with interpolated values.  The histogram based on the interpolated data
-appears to approximate a normal distribution very closely:  the histogram of just the
-non-NA data, by contrast, looks roughly normal, but also has a notable peak in its
-lowermost "bucket."  This lower peak no doubt stemmed from those total daily step
-counts which systematically underestimated the true daily step count by treating NAs as
-zeroes:  once this artificial asymmetry had been corrected by replacing the NAs with
-average interval values, the histogram became much more symmetric, and the mean and
-median converged accordingly.day
+Thus, it's not surprising that our mean total steps per day remains unchanged, and that
+we end up with a sufficient number of samples perfectly at the mean to forcibly shift
+the median to be equal to the mean.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
