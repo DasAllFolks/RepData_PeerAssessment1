@@ -178,15 +178,18 @@ weekends <- average_steps_by_interval(weekend_data)
 Combine these two into a data frame, identifying which are weekdays, which weekends:
 
 ```{R}
+head(weekdays)
+class(names(weekdays))
 weekdays <- data.frame(
-  interval=names(weekdays),
+  interval=as.numeric(names(weekdays)),
   steps=weekdays,
   day_type=rep('weekday', length(weekdays)))
 weekends <- data.frame(
-  interval=names(weekends),
+  interval=as.numeric(names(weekends)),
   steps=weekends,
   day_type=rep('weekend', length(weekends)))
 averages <- right_join(weekdays, weekends)
+class(averages$interval)
 averages <- arrange(averages, interval)
 head(averages)
 ```
