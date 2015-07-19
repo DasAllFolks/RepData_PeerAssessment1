@@ -139,20 +139,6 @@ the median to be equal to the mean.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-First we add a column to our data frame to identify whether each sample took place on a
-weekday or weekend:
-
-```{R}
-interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
-  weekday <- weekdays(date)
-  if(weekday %in% c('Saturday', 'Sunday')) {
-    'weekend'
-  } else {
-    'weekday'
-  }
-}))
-```
-
 First, we separate out our weekday and weekend recordings into separate datasets:
 
 ```{R}
@@ -189,8 +175,6 @@ weekends <- data.frame(
 
 averages <- rbind(weekdays, weekends)
 averages$day_type <-factor(averages$day_type, levels=c('weekday', 'weekend'))
-averages <- arrange(averages, interval)
-head(averages)
 ```
 
 Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
@@ -203,12 +187,3 @@ xyplot(
   layout = c(1, 2),
   xlab='Interval',
   ylab='Number of steps')
-
-
-xyplot(
-  average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
-  type = 'l',
-  layout = c(1, 2),
-  xlab = 'Interval',
-  ylab = 'Number of steps')
-```
