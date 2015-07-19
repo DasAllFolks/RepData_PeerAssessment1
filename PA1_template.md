@@ -292,8 +292,8 @@ plot(
   xlab = NA,
   ylab = NA)
 
-mtext('Interval', side = 1, outer = TRUE)
-mtext('Number of steps', side = 2, outer = TRUE)
+mtext('Interval', side = 1, line = 3)
+mtext('Number of steps', side = 2, line = 2)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
