@@ -159,24 +159,16 @@ Now we can do a side-by-side time series plot of the average number of steps tak
 ```{R}
 average_steps_by_interval <- function (dataset) {
   by_interval <- split(dataset, dataset$interval)
-  sapply(by_interval, function (interval) { mean(interval$steps) })
+  sapply(by_interval, function (interval) { sum(interval$steps) })
 }
 
-get( getOption( "device" ) )()
-
-split.screen( figs = c( 2, 1 ) )
-
-screen(1)
+par(mfrow = c(2, 1))
 plot(
   x = unique(interpolated$interval),
-  y = average_steps_by_interval(data[data$day_type == 'weekday']),
+  y = average_steps_by_interval(data[data$day_type == 'weekday',]),
   type = 'l')
-
-screen(2)
 plot(
   x = unique(interpolated$interval),
-  y = average_steps_by_interval(data[data$day_type == 'weekday']),
+  y = average_steps_by_interval(data[data$day_type == 'weekday',]),
   type = 'l')
-
-close.screen(all = TRUE)
 ```
