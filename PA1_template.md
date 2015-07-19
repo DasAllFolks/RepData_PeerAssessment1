@@ -155,8 +155,8 @@ sum(is.na(data$steps))
 As a way to estimate these missing data values, we will use the average values for the
 5-minute intervals as calculated earlier in this assignment.
 
-A dataset which "fills in" these missing values using this strategy can be constructed as
-follows:
+A dataset which "fills in" these missing values using this strategy can be constructed
+as follows:
 
 
 ```r
@@ -251,21 +251,6 @@ the median to be equal to the mean.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-First we add a column to our data frame to identify whether each sample took place on a
-weekday or weekend:
-
-
-```r
-interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
-  weekday <- weekdays(date)
-  if(weekday %in% c('Saturday', 'Sunday')) {
-    'weekend'
-  } else {
-    'weekday'
-  }
-}))
-```
-
 First, we separate out our weekday and weekend recordings into separate datasets:
 
 
@@ -305,18 +290,6 @@ weekends <- data.frame(
 
 averages <- rbind(weekdays, weekends)
 averages$day_type <-factor(averages$day_type, levels=c('weekday', 'weekend'))
-averages <- arrange(averages, interval)
-head(averages)
-```
-
-```
-##   interval      steps day_type
-## 1        0 0.21462264  weekday
-## 2        0 2.25115304  weekend
-## 3        5 0.04245283  weekday
-## 4        5 0.44528302  weekend
-## 5       10 0.01650943  weekday
-## 6       10 0.17316562  weekend
 ```
 
 Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
@@ -332,15 +305,4 @@ xyplot(
   ylab='Number of steps')
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
-
-```r
-xyplot(
-  average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
-  type = 'l',
-  layout = c(1, 2),
-  xlab = 'Interval',
-  ylab = 'Number of steps')
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-17-2.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 

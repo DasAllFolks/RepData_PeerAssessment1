@@ -84,8 +84,8 @@ sum(is.na(data$steps))
 As a way to estimate these missing data values, we will use the average values for the
 5-minute intervals as calculated earlier in this assignment.
 
-A dataset which "fills in" these missing values using this strategy can be constructed as
-follows:
+A dataset which "fills in" these missing values using this strategy can be constructed
+as follows:
 
 ```{R}
 interpolated <- data
