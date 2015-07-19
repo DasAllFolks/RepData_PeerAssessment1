@@ -152,3 +152,10 @@ interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
   }
 }))
 ```
+
+Now let's split our our original dataset into weekday and weekend subsets:
+
+```{R}
+weekday_data <- data[data$day_type == 'weekday']
+weekend_data <- data[data$day_type == 'weekend']
+```
