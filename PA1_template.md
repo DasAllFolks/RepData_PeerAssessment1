@@ -90,7 +90,7 @@ cleaned dataset (i.e., still ignoring NAs) across the interval numbers:
 ```r
 by_interval = split(cleaned, cleaned$interval)
 averages <- sapply(by_interval, function (interval) { mean(interval$steps) })
-plot(x = names(averages),
+plot(x = unique(cleaned$interval),
      y = averages,
      type = 'l',
      xlab='Time of day',
@@ -251,7 +251,40 @@ the median to be equal to the mean.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+First we add a column to our data frame to identify whether each sample took place on a
+weekday or weekend:
+
 
 ```r
-day_type <- factor(c('weekday', 'weekend')) 
+interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
+  weekday <- weekdays(date)
+  if(weekday %in% c('Saturday', 'Sunday')) {
+    'weekend'
+  } else {
+    'weekday'
+  }
+}))
 ```
+
+
+Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
+
+
+```r
+average_steps_by_interval <- function (dataset) {
+  by_interval <- split(dataset, dataset$interval)
+  sapply(by_interval, function (interval) { mean(interval$steps) })
+}
+
+par(mfrow = c(2, 1))
+plot(
+  x = unique(interpolated$interval),
+  y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
+  type = 'l')
+plot(
+  x = unique(interpolated$interval),
+  y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
+  type = 'l')
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 

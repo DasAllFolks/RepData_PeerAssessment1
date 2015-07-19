@@ -53,7 +53,7 @@ cleaned dataset (i.e., still ignoring NAs) across the interval numbers:
 ```{R}
 by_interval = split(cleaned, cleaned$interval)
 averages <- sapply(by_interval, function (interval) { mean(interval$steps) })
-plot(x = names(averages),
+plot(x = unique(cleaned$interval),
      y = averages,
      type = 'l',
      xlab='Time of day',
@@ -159,16 +159,16 @@ Now we can do a side-by-side time series plot of the average number of steps tak
 ```{R}
 average_steps_by_interval <- function (dataset) {
   by_interval <- split(dataset, dataset$interval)
-  sapply(by_interval, function (interval) { sum(interval$steps) })
+  sapply(by_interval, function (interval) { mean(interval$steps) })
 }
 
 par(mfrow = c(2, 1))
 plot(
   x = unique(interpolated$interval),
-  y = average_steps_by_interval(data[data$day_type == 'weekday',]),
+  y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
   type = 'l')
 plot(
   x = unique(interpolated$interval),
-  y = average_steps_by_interval(data[data$day_type == 'weekday',]),
+  y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
   type = 'l')
 ```
