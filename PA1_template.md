@@ -264,6 +264,19 @@ interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
     'weekday'
   }
 }))
+sum(interpolated$day_type == 'weekday')
+```
+
+```
+## [1] 12960
+```
+
+```r
+sum(interpolated$day_type == 'weekend')
+```
+
+```
+## [1] 4608
 ```
 
 

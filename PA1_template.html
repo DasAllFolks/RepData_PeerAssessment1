@@ -201,7 +201,11 @@ print(percent_na_by_date)</code></pre>
   } else {
     'weekday'
   }
-}))</code></pre>
+}))
+sum(interpolated$day_type == 'weekday')</code></pre>
+<pre><code>## [1] 12960</code></pre>
+<pre class="r"><code>sum(interpolated$day_type == 'weekend')</code></pre>
+<pre><code>## [1] 4608</code></pre>
 <p>Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:</p>
 <pre class="r"><code>average_steps_by_interval &lt;- function (dataset) {
   by_interval &lt;- split(dataset, dataset$interval)
