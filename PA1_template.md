@@ -279,7 +279,8 @@ average_steps_by_interval <- function (dataset) {
 library(lattice)
 xyplot(
   average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
-  type = 'l')
+  type = 'l',
+  layout = c(1, 3))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
