@@ -276,7 +276,7 @@ average_steps_by_interval <- function (dataset) {
   sapply(by_interval, function (interval) { mean(interval$steps) })
 }
 
-par(mfrow = c(2, 1))
+par(mfrow = c(2, 1), cex = 0.75)
 plot(
   x = unique(interpolated$interval),
   y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
@@ -292,8 +292,8 @@ plot(
   xlab = NA,
   ylab = NA)
 
-mtext('Interval', side = 1, line = 3)
-mtext('Number of steps', side = 2, line = 2)
+mtext('Interval', side = 1, line = 3, cex = 1.5)
+mtext('Number of steps', side = 2, line = 2, cex = 1.5)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
