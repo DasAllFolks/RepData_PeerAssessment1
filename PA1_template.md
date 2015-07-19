@@ -280,15 +280,18 @@ par(mfrow = c(2, 1))
 plot(
   x = unique(interpolated$interval),
   y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
+  main = 'weekend',
   type = 'l',
-  xlab = NA,
-  ylab = NA)
+  xlab=NA,
+  ylab=NA)
 plot(
   x = unique(interpolated$interval),
   y = average_steps_by_interval(interpolated[interpolated$day_type == 'weekday',]),
   type = 'l',
-  xlab=NA,
-  ylab=NA)
+  main ='weekday',
+  xlab = NA,
+  ylab = NA)
+
 mtext('Interval', side = 1, outer = TRUE)
 mtext('Number of steps', side = 2, outer = TRUE)
 ```
