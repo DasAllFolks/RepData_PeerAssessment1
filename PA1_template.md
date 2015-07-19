@@ -287,7 +287,46 @@ average_steps_by_interval <- function (dataset) {
 }
 
 weekdays <- average_steps_by_interval(weekday_data)
-weekend <- average_steps_by_interval(weekend_data)
+weekends <- average_steps_by_interval(weekend_data)
+```
+
+Combine these two into a data frame, identifying which are weekdays, which weekends:
+
+
+```r
+weekdays <- data.frame(
+  interval=names(weekdays),
+  steps=weekdays,
+  day_type=rep('weekday', length(weekdays)))
+weekends <- data.frame(
+  interval=names(weekends),
+  steps=weekends,
+  day_type=rep('weekend', length(weekends)))
+averages <- right_join(weekdays, weekends)
+```
+
+```
+## Joining by: c("interval", "steps", "day_type")
+```
+
+```
+## Warning in right_join_impl(x, y, by$x, by$y): joining factors with
+## different levels, coercing to character vector
+```
+
+```r
+averages <- arrange(averages, interval)
+head(averages)
+```
+
+```
+##   interval      steps day_type
+## 1        0  2.2511530  weekend
+## 2       10  0.1731656  weekend
+## 3      100  0.4205451  weekend
+## 4     1000 37.8754717  weekend
+## 5     1005 18.2197065  weekend
+## 6     1010 39.0775681  weekend
 ```
 
 Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
@@ -309,7 +348,7 @@ xyplot(
 ## Warning in is.na(y): is.na() applied to non-(list or vector) of type 'NULL'
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
 
 ```r
 xyplot(
@@ -320,4 +359,4 @@ xyplot(
   ylab = 'Number of steps')
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-2.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-17-2.png) 
