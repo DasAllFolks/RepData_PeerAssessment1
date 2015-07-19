@@ -294,23 +294,6 @@ Combine these two into a data frame, identifying which are weekdays, which weeke
 
 
 ```r
-head(weekdays)
-```
-
-```
-##           0           5          10          15          20          25 
-## 0.214622642 0.042452830 0.016509434 0.018867925 0.009433962 3.511792453
-```
-
-```r
-class(names(weekdays))
-```
-
-```
-## [1] "character"
-```
-
-```r
 weekdays <- data.frame(
   interval=as.numeric(names(weekdays)),
   steps=weekdays,
@@ -319,39 +302,20 @@ weekends <- data.frame(
   interval=as.numeric(names(weekends)),
   steps=weekends,
   day_type=rep('weekend', length(weekends)))
-averages <- right_join(weekdays, weekends)
-```
 
-```
-## Joining by: c("interval", "steps", "day_type")
-```
-
-```
-## Warning in right_join_impl(x, y, by$x, by$y): joining factors with
-## different levels, coercing to character vector
-```
-
-```r
-class(averages$interval)
-```
-
-```
-## [1] "numeric"
-```
-
-```r
+averages <- rbind(weekdays, weekends)
 averages <- arrange(averages, interval)
 head(averages)
 ```
 
 ```
 ##   interval      steps day_type
-## 1        0 2.25115304  weekend
-## 2        5 0.44528302  weekend
-## 3       10 0.17316562  weekend
-## 4       15 0.19790356  weekend
-## 5       20 0.09895178  weekend
-## 6       25 1.59035639  weekend
+## 1        0 0.21462264  weekday
+## 2        0 2.25115304  weekend
+## 3        5 0.04245283  weekday
+## 4        5 0.44528302  weekend
+## 5       10 0.01650943  weekday
+## 6       10 0.17316562  weekend
 ```
 
 Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:

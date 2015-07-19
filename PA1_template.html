@@ -217,11 +217,6 @@ weekend_data = interpolated[!is_weekday(interpolated$date),]</code></pre>
 weekdays &lt;- average_steps_by_interval(weekday_data)
 weekends &lt;- average_steps_by_interval(weekend_data)</code></pre>
 <p>Combine these two into a data frame, identifying which are weekdays, which weekends:</p>
-<pre class="r"><code>head(weekdays)</code></pre>
-<pre><code>##           0           5          10          15          20          25 
-## 0.214622642 0.042452830 0.016509434 0.018867925 0.009433962 3.511792453</code></pre>
-<pre class="r"><code>class(names(weekdays))</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
 <pre class="r"><code>weekdays &lt;- data.frame(
   interval=as.numeric(names(weekdays)),
   steps=weekdays,
@@ -230,21 +225,17 @@ weekends &lt;- data.frame(
   interval=as.numeric(names(weekends)),
   steps=weekends,
   day_type=rep('weekend', length(weekends)))
-averages &lt;- right_join(weekdays, weekends)</code></pre>
-<pre><code>## Joining by: c(&quot;interval&quot;, &quot;steps&quot;, &quot;day_type&quot;)</code></pre>
-<pre><code>## Warning in right_join_impl(x, y, by$x, by$y): joining factors with
-## different levels, coercing to character vector</code></pre>
-<pre class="r"><code>class(averages$interval)</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>averages &lt;- arrange(averages, interval)
+
+averages &lt;- rbind(weekdays, weekends)
+averages &lt;- arrange(averages, interval)
 head(averages)</code></pre>
 <pre><code>##   interval      steps day_type
-## 1        0 2.25115304  weekend
-## 2        5 0.44528302  weekend
-## 3       10 0.17316562  weekend
-## 4       15 0.19790356  weekend
-## 5       20 0.09895178  weekend
-## 6       25 1.59035639  weekend</code></pre>
+## 1        0 0.21462264  weekday
+## 2        0 2.25115304  weekend
+## 3        5 0.04245283  weekday
+## 4        5 0.44528302  weekend
+## 5       10 0.01650943  weekday
+## 6       10 0.17316562  weekend</code></pre>
 <p>Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:</p>
 <pre class="r"><code>library(lattice)
 xyplot(
