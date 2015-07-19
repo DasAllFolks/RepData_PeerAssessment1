@@ -112,16 +112,16 @@ Now we can recalculate the total number of steps taken per day and do a new hist
 
 ```{R}
 by_date <- split(interpolated, interpolated$date)
-interpolated_total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
+total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
-hist(interpolated_total_steps_per_day, breaks=10, ylim = c(0, 25))
+
 ```
 
 And we can calculate the mean and median of the new dataset as follows:
 
 ```{R}
-mean(interpolated_total_steps_per_day)
-median(interpolated_total_steps_per_day)
+mean(total_steps_per_day)
+median(total_steps_per_day)
 ```
 
 These values differ from the original ones calculated (i.e., mean and median of total number of steps per day for non-NA data only) in two dramatic ways:

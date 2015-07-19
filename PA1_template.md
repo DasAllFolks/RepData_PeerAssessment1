@@ -215,23 +215,17 @@ Now we can recalculate the total number of steps taken per day and do a new hist
 
 ```r
 by_date <- split(interpolated, interpolated$date)
-interpolated_total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
+total_steps_per_day <- sapply(by_date, function (date) { sum(date$steps) })
 hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 
-```r
-hist(interpolated_total_steps_per_day, breaks=10, ylim = c(0, 25))
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-10-2.png) 
-
 And we can calculate the mean and median of the new dataset as follows:
 
 
 ```r
-mean(interpolated_total_steps_per_day)
+mean(total_steps_per_day)
 ```
 
 ```
@@ -239,7 +233,7 @@ mean(interpolated_total_steps_per_day)
 ```
 
 ```r
-median(interpolated_total_steps_per_day)
+median(total_steps_per_day)
 ```
 
 ```
