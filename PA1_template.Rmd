@@ -114,6 +114,20 @@ mean(total_steps_per_day)
 median(total_steps_per_day)
 ```
 
+It is notable that the means of both these calculations are identical, while the medians
+differ only slightly (the median matching the mean exactly in the latter calculation).
+
+This ultimately makes sense; as the code below reveals, all of the dates sampled in this
+study either featured a complete set of data for all intervals, or else all NAs:
+
+```{R}
+by_date <- split(data, data$date)
+percent_na_by_date <- sapply(by_date, function (date) {
+  sum(is.na(date$steps)) / nrow(date)
+})
+print(percent_na_by_date)
+```
+
 These values differ from the original ones calculated (i.e., mean and median of total number of steps per day for non-NA data only) in two dramatic ways:
 
 - Both values are higher than the originals (especially so in the case of the mean)
