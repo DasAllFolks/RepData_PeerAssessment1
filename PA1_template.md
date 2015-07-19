@@ -280,7 +280,9 @@ library(lattice)
 xyplot(
   average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
   type = 'l',
-  layout = c(1, 3))
+  layout = c(1, 3),
+  xlab = 'Interval',
+  ylab = 'Number of steps')
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
