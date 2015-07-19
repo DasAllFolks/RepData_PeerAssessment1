@@ -264,23 +264,20 @@ interpolated$day_type <- factor(sapply(interpolated$date, function (date) {
     'weekday'
   }
 }))
-sum(interpolated$day_type == 'weekday')
 ```
 
-```
-## [1] 12960
-```
+First, we separate out our weekday and weekend recordings into separate datasets:
+
 
 ```r
-sum(interpolated$day_type == 'weekend')
+is_weekday <- function (date) {
+  weekdays(date) %in% c('Saturday', 'Sunday')
+}
+weekday_data = interpolated[is_weekday(interpolated$date),]
+weekend_data = interpolated[!is_weekday(interpolated$date),]
 ```
 
-```
-## [1] 4608
-```
-
-
-Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
+Get the average number of steps for each dataset separately:
 
 
 ```r
@@ -289,13 +286,38 @@ average_steps_by_interval <- function (dataset) {
   sapply(by_interval, function (interval) { mean(interval$steps) })
 }
 
+weekdays <- average_steps_by_interval(weekday_data)
+weekend <- average_steps_by_interval(weekend_data)
+```
+
+Now we can do a side-by-side time series plot of the average number of steps taken per 5-minute interval on weekdays vs. weekend days:
+
+
+```r
 library(lattice)
+xyplot(
+  ~weekdays,
+  type = 'l',
+  layout = c(1, 2))
+```
+
+```
+## Warning in is.na(y): is.na() applied to non-(list or vector) of type 'NULL'
+```
+
+```
+## Warning in is.na(y): is.na() applied to non-(list or vector) of type 'NULL'
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+
+```r
 xyplot(
   average_steps_by_interval(interpolated)~unique(interpolated$interval)|interpolated$day_type,
   type = 'l',
-  layout = c(1, 3),
+  layout = c(1, 2),
   xlab = 'Interval',
   ylab = 'Number of steps')
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-16-2.png) 
