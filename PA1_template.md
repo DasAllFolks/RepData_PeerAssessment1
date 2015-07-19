@@ -304,6 +304,7 @@ weekends <- data.frame(
   day_type=rep('weekend', length(weekends)))
 
 averages <- rbind(weekdays, weekends)
+averages$day_type <-factor(averages$day_type, levels=c('weekday', 'weekend'))
 averages <- arrange(averages, interval)
 head(averages)
 ```
@@ -324,17 +325,9 @@ Now we can do a side-by-side time series plot of the average number of steps tak
 ```r
 library(lattice)
 xyplot(
-  ~weekdays,
+  averages$steps ~ averages$interval | averages$day_type,
   type = 'l',
   layout = c(1, 2))
-```
-
-```
-## Warning in is.na(y): is.na() applied to non-(list or vector) of type 'NULL'
-```
-
-```
-## Warning in is.na(y): is.na() applied to non-(list or vector) of type 'NULL'
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
