@@ -90,6 +90,24 @@ length(total_steps_per_day)
 ```
 
 ```r
+summary(unclassed_total_steps_per_day)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0    6778   10400    9354   12810   21190
+```
+
+```r
+summary(total_steps_per_day)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      41    8841   10760   10770   13290   21190
+```
+
+```r
 hist(unclassed_total_steps_per_day, breaks=10, ylim = c(0, 25))
 ```
 

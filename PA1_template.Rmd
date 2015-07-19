@@ -43,6 +43,8 @@ Histogram of total steps per day:
 ```{R}
 length(unclassed_total_steps_per_day)
 length(total_steps_per_day)
+summary(unclassed_total_steps_per_day)
+summary(total_steps_per_day)
 hist(unclassed_total_steps_per_day, breaks=10, ylim = c(0, 25))
 hist(total_steps_per_day, breaks=10, ylim = c(0, 25))
 ```
